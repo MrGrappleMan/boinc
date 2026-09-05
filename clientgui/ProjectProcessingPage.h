@@ -28,13 +28,7 @@ public:
     virtual wxEvent *Clone() const { return new CProjectProcessingPageEvent(*this); }
 };
 
-
-BEGIN_DECLARE_EVENT_TYPES()
-DECLARE_EVENT_TYPE( wxEVT_PROJECTPROCESSING_STATECHANGE, 11100 )
-END_DECLARE_EVENT_TYPES()
-
-#define EVT_PROJECTPROCESSING_STATECHANGE(fn) \
-    DECLARE_EVENT_TABLE_ENTRY(wxEVT_PROJECTPROCESSING_STATECHANGE, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
+wxDECLARE_EVENT(wxEVT_PROJECTPROCESSING_STATECHANGE, CProjectProcessingPageEvent);
 
 #define ATTACHPROJECT_INIT                              0
 #define ATTACHPROJECT_ACCOUNTQUERY_BEGIN                1
@@ -46,7 +40,6 @@ END_DECLARE_EVENT_TYPES()
 
 class CProjectProcessingPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CProjectProcessingPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CProjectProcessingPage();

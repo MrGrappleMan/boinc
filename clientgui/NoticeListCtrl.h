@@ -25,7 +25,6 @@
 class CNoticeListCtrl: public wxWindow
 {
     DECLARE_DYNAMIC_CLASS( CNoticeListCtrl )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors

@@ -49,19 +49,6 @@ enum {  // Project buttons
     show_hide_project_list
 };
 
-BEGIN_EVENT_TABLE (CPaintStatistics, wxWindow)
-    EVT_PAINT(CPaintStatistics::OnPaint)
-    EVT_SIZE(CPaintStatistics::OnSize)
-    EVT_LEFT_DOWN(CPaintStatistics::OnLeftMouseDown)
-    EVT_LEFT_UP(CPaintStatistics::OnLeftMouseUp)
-    EVT_RIGHT_DOWN(CPaintStatistics::OnRightMouseDown)
-    EVT_RIGHT_UP(CPaintStatistics::OnRightMouseUp)
-    EVT_MOTION(CPaintStatistics::OnMouseMotion)
-    EVT_LEAVE_WINDOW(CPaintStatistics::OnMouseLeaveWindows)
-    EVT_ERASE_BACKGROUND(CPaintStatistics::OnEraseBackground)
-    EVT_SCROLL(CPaintStatistics::OnLegendScroll)
-END_EVENT_TABLE ()
-
 // Set USE_MEMORYDC FALSE to aid debugging
 #define USE_MEMORYDC TRUE
 
@@ -224,6 +211,25 @@ CPaintStatistics::CPaintStatistics(wxWindow* parent, wxWindowID id, const wxPoin
     m_fauxStatisticsView = NULL;
     SetupMacAccessibilitySupport();
 #endif
+
+    Bind(wxEVT_PAINT, [this](wxPaintEvent& event){ OnPaint(event); });
+    Bind(wxEVT_SIZE, [this](wxSizeEvent& event){ OnSize(event); });
+    Bind(wxEVT_LEFT_DOWN, [this](wxMouseEvent& event){ OnLeftMouseDown(event); });
+    Bind(wxEVT_LEFT_UP, [this](wxMouseEvent& event){ OnLeftMouseUp(event); });
+    Bind(wxEVT_RIGHT_DOWN, [this](wxMouseEvent& event){ OnRightMouseDown(event); });
+    Bind(wxEVT_RIGHT_UP, [this](wxMouseEvent& event){ OnRightMouseUp(event); });
+    Bind(wxEVT_MOTION, [this](wxMouseEvent& event){ OnMouseMotion(event); });
+    Bind(wxEVT_LEAVE_WINDOW, [this](wxMouseEvent& event){ OnMouseLeaveWindows(event); });
+    Bind(wxEVT_ERASE_BACKGROUND, [this](wxEraseEvent& event){ OnEraseBackground(event); });
+    Bind(wxEVT_SCROLL_TOP, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_BOTTOM, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_LINEUP, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_LINEDOWN, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_PAGEUP, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_PAGEDOWN, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_THUMBTRACK, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_THUMBRELEASE, [this](wxScrollEvent& event){ OnLegendScroll(event); });
+    Bind(wxEVT_SCROLL_CHANGED, [this](wxScrollEvent& event){ OnLegendScroll(event); });
 }
 
 CPaintStatistics::~CPaintStatistics() {
@@ -2003,20 +2009,6 @@ void CPaintStatistics::OnSize(wxSizeEvent& event) {
 
 IMPLEMENT_DYNAMIC_CLASS(CViewStatistics, CBOINCBaseView)
 
-BEGIN_EVENT_TABLE (CViewStatistics, CBOINCBaseView)
-    EVT_BUTTON(ID_TASK_STATISTICS_USERTOTAL, CViewStatistics::OnStatisticsUserTotal)
-    EVT_BUTTON(ID_TASK_STATISTICS_USERAVERAGE, CViewStatistics::OnStatisticsUserAverage)
-    EVT_BUTTON(ID_TASK_STATISTICS_HOSTTOTAL, CViewStatistics::OnStatisticsHostTotal)
-    EVT_BUTTON(ID_TASK_STATISTICS_HOSTAVERAGE, CViewStatistics::OnStatisticsHostAverage)
-    EVT_BUTTON(ID_TASK_STATISTICS_MODEVIEWALLSEPARATE, CViewStatistics::OnStatisticsModeViewAllSeparate)
-    EVT_BUTTON(ID_TASK_STATISTICS_MODEVIEWONEPROJECT, CViewStatistics::OnStatisticsModeViewOneProject)
-    EVT_BUTTON(ID_TASK_STATISTICS_MODEVIEWALLTOGETHER, CViewStatistics::OnStatisticsModeViewAllTogether)
-    EVT_BUTTON(ID_TASK_STATISTICS_MODEVIEWSUM, CViewStatistics::OnStatisticsModeViewSum)
-    EVT_BUTTON(ID_TASK_STATISTICS_NEXTPROJECT, CViewStatistics::OnStatisticsNextProject)
-    EVT_BUTTON(ID_TASK_STATISTICS_PREVPROJECT, CViewStatistics::OnStatisticsPrevProject)
-    EVT_BUTTON(ID_TASK_STATISTICS_HIDEPROJLIST, CViewStatistics::OnShowHideProjectList)
-END_EVENT_TABLE ()
-
 CViewStatistics::CViewStatistics()
 {}
 
@@ -2137,6 +2129,18 @@ CViewStatistics::CViewStatistics(wxNotebook* pNotebook) :
 
     // Create Task Pane Items
     m_pTaskPane->UpdateControls();
+
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsUserTotal(event); }, ID_TASK_STATISTICS_USERTOTAL);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsUserAverage(event); }, ID_TASK_STATISTICS_USERAVERAGE);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsHostTotal(event); }, ID_TASK_STATISTICS_HOSTTOTAL);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsHostAverage(event); }, ID_TASK_STATISTICS_HOSTAVERAGE);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsModeViewAllSeparate(event); }, ID_TASK_STATISTICS_MODEVIEWALLSEPARATE);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsModeViewOneProject(event); }, ID_TASK_STATISTICS_MODEVIEWONEPROJECT);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsModeViewAllTogether(event); }, ID_TASK_STATISTICS_MODEVIEWALLTOGETHER);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsModeViewSum(event); }, ID_TASK_STATISTICS_MODEVIEWSUM);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsNextProject(event); }, ID_TASK_STATISTICS_NEXTPROJECT);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnStatisticsPrevProject(event); }, ID_TASK_STATISTICS_PREVPROJECT);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnShowHideProjectList(event); }, ID_TASK_STATISTICS_HIDEPROJLIST);
 
     UpdateSelection();
 }

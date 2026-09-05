@@ -25,12 +25,6 @@ const int taskButtonWidth = taskPaneWidth - 55;
 
 IMPLEMENT_DYNAMIC_CLASS(CBOINCTaskCtrl, wxScrolledWindow)
 
-#ifdef __WXMSW__
-BEGIN_EVENT_TABLE (CBOINCTaskCtrl, CBOINCBaseView)
-    EVT_CHILD_FOCUS(CBOINCTaskCtrl::OnChildFocus)
-END_EVENT_TABLE ()
-#endif
-
 
 CBOINCTaskCtrl::CBOINCTaskCtrl() {}
 
@@ -44,6 +38,10 @@ CBOINCTaskCtrl::CBOINCTaskCtrl(CBOINCBaseView* pView, wxWindowID iTaskWindowID, 
     SetVirtualSize( taskPaneWidth, 1000 );
     EnableScrolling(false, true);
     SetScrollRate( 0, 10 );
+
+#ifdef __WXMSW__
+    Bind(wxEVT_CHILD_FOCUS, [this](wxChildFocusEvent& event){ OnChildFocus(event); });
+#endif
 }
 
 

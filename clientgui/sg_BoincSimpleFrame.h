@@ -62,7 +62,6 @@ public:
     //////////
     bool        m_bNewNoticeAlert;
     bool        m_bNoticesButtonIsRed;
-    DECLARE_EVENT_TABLE()
 
 protected:
     void OnPaint(wxPaintEvent& event);
@@ -154,7 +153,6 @@ private:
 
     wxBoxSizer* mainSizer;
 
-    DECLARE_EVENT_TABLE()
 };
 
 #endif

@@ -86,7 +86,6 @@ enum {
 class CPanelPreferences: public wxPanel
 {
     DECLARE_DYNAMIC_CLASS( CPanelPreferences )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors
@@ -186,7 +185,6 @@ private:
 class CDlgPreferences: public wxDialog
 {
     DECLARE_DYNAMIC_CLASS( CDlgPreferences )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors

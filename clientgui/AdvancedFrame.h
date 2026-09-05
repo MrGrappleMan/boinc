@@ -39,9 +39,6 @@ public:
     wxStaticText*   m_ptxtConnected;
     wxStaticBitmap* m_pbmpDisconnect;
     wxStaticText*   m_ptxtDisconnect;
-
-private:
-    DECLARE_EVENT_TABLE()
 };
 
 
@@ -141,8 +138,6 @@ private:
 
     void            StartTimers();
     void            StopTimers();
-
-    DECLARE_EVENT_TABLE()
 };
 
 #endif

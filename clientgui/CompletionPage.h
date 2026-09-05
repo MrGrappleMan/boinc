@@ -20,7 +20,6 @@
 
 class CCompletionPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CCompletionPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CCompletionPage();

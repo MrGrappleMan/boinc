@@ -37,7 +37,6 @@
 
 #include "Events.h"
 #include "LogBOINC.h"
-#include "BOINCGUIApp.h"
 #include "SkinManager.h"
 #include "MainDocument.h"
 #include "BOINCClientManager.h"
@@ -49,23 +48,16 @@
 #include "procinfo.h"
 #include "sg_BoincSimpleFrame.h"
 #include "DlgGenericMessage.h"
-
+#include "AsyncRPC.h"
+#include "BOINCGUIApp.h"
 
 bool s_bSkipExitConfirmation = false;
 
 
-DEFINE_EVENT_TYPE(wxEVT_RPC_FINISHED)
+wxDEFINE_EVENT(wxEVT_RPC_FINISHED, CRPCFinishedEvent);
 
 IMPLEMENT_APP(CBOINCGUIApp)
 IMPLEMENT_DYNAMIC_CLASS(CBOINCGUIApp, wxApp)
-
-BEGIN_EVENT_TABLE (CBOINCGUIApp, wxApp)
-    EVT_ACTIVATE_APP(CBOINCGUIApp::OnActivateApp)
-    EVT_RPC_FINISHED(CBOINCGUIApp::OnRPCFinished)
-#ifndef __WXMAC__
-    EVT_END_SESSION(CBOINCGUIApp::OnEndSession)
-#endif
-END_EVENT_TABLE ()
 
 #if defined(__WXGTK__) && defined(BUILD_WITH_VCPKG)
 extern "C" {
@@ -94,6 +86,13 @@ bool CBOINCGUIApp::OnInit() {
         hp(NULL);
     } catch (...) {}
 #endif
+
+    Bind(wxEVT_ACTIVATE_APP, [this](wxActivateEvent& event){ OnActivateApp(event); });
+    Bind(wxEVT_RPC_FINISHED, [this](CRPCFinishedEvent& event){ OnRPCFinished(event); });
+#ifndef __WXMAC__
+    Bind(wxEVT_END_SESSION, [this](wxCloseEvent& event){ OnEndSession(event); });
+#endif
+
     // Initialize globals
 #ifdef SANDBOX
     g_use_sandbox = true;

@@ -21,7 +21,6 @@
 
 class CProjectWelcomePage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CProjectWelcomePage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CProjectWelcomePage();

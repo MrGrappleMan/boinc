@@ -20,7 +20,6 @@
 
 class CErrNotFoundPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CErrNotFoundPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CErrNotFoundPage();

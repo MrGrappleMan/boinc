@@ -28,13 +28,7 @@ public:
     virtual wxEvent *Clone() const { return new CProjectPropertiesPageEvent(*this); }
 };
 
-
-BEGIN_DECLARE_EVENT_TYPES()
-DECLARE_EVENT_TYPE(wxEVT_PROJECTPROPERTIES_STATECHANGE, 11000)
-END_DECLARE_EVENT_TYPES()
-
-#define EVT_PROJECTPROPERTIES_STATECHANGE(fn) \
-    DECLARE_EVENT_TABLE_ENTRY(wxEVT_PROJECTPROPERTIES_STATECHANGE, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
+wxDECLARE_EVENT(wxEVT_PROJECTPROPERTIES_STATECHANGE, CProjectPropertiesPageEvent);
 
 #define PROJPROP_INIT                                   0
 #define PROJPROP_RETRPROJECTPROPERTIES_BEGIN            1
@@ -48,7 +42,6 @@ END_DECLARE_EVENT_TYPES()
 
 class CProjectPropertiesPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CProjectPropertiesPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CProjectPropertiesPage();

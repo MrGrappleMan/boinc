@@ -19,12 +19,6 @@
 #ifndef BOINC_DLGITEMPROPERTIES_H
 #define BOINC_DLGITEMPROPERTIES_H
 
-#include <wx/sizer.h>
-#include <wx/string.h>
-#include <wx/button.h>
-#include <wx/dialog.h>
-#include <wx/html/htmlwin.h>
-
 #include "MainDocument.h"
 
 #define ID_COPYSELECTED 10001
@@ -32,7 +26,6 @@
 
 class CDlgItemProperties : public wxDialog {
 	DECLARE_DYNAMIC_CLASS( CDlgItemProperties )
-    DECLARE_EVENT_TABLE()
 public:
 	CDlgItemProperties(wxWindow* parent=NULL);//to act as standard constructor set a default value
 	virtual ~CDlgItemProperties();

@@ -19,26 +19,6 @@
 #ifndef BOINC_DLGOPTIONS_H
 #define BOINC_DLGOPTIONS_H
 
-/*!
- * Includes
- */
-
-////@begin includes
-#include "wx/notebook.h"
-////@end includes
-
-/*!
- * Forward declarations
- */
-
-////@begin forward declarations
-////@end forward declarations
-
-/*!
- * Control identifiers
- */
-
-////@begin control identifiers
 #define ID_DIALOG 10000
 #define SYMBOL_CDLGOPTIONS_STYLE wxDEFAULT_DIALOG_STYLE
 #define SYMBOL_CDLGOPTIONS_TITLE wxT("")
@@ -78,11 +58,6 @@
 #define ID_SOCKSPASSWORDCTRL 10016
 #define ID_HTTPNOPROXYCTRL 10017
 #define ID_SOCKSNOPROXYCTRL 10018
-////@end control identifiers
-
-/*!
- * Compatibility
- */
 
 #ifndef wxCLOSE_BOX
 #define wxCLOSE_BOX 0x1000
@@ -91,14 +66,9 @@
 #define wxFIXED_MINSIZE 0
 #endif
 
-/*!
- * CDlgOptions class declaration
- */
-
 class CDlgOptions: public wxDialog
 {
     DECLARE_DYNAMIC_CLASS( CDlgOptions )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors

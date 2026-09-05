@@ -19,25 +19,6 @@
 #ifndef BOINC_DLGGENERICMESSAGE_H
 #define BOINC_DLGGENERICMESSAGE_H
 
-/*!
- * Includes
- */
-
-////@begin includes
-////@end includes
-
-/*!
- * Forward declarations
- */
-
-////@begin forward declarations
-////@end forward declarations
-
-/*!
- * Control identifiers
- */
-
-////@begin control identifiers
 #define ID_DIALOG 10000
 #ifndef wxCLOSE_BOX
 #define wxCLOSE_BOX 0x1000
@@ -47,11 +28,6 @@
 #else
 #define SYMBOL_CDLGGENERICMESSAGE_STYLE wxCAPTION|wxRESIZE_BORDER|wxSYSTEM_MENU|wxCLOSE_BOX
 #endif
-////@end control identifiers
-
-/*!
- * CDlgGenericMessage class declaration
- */
 
 struct CDlgGenericMessageButton
 {
@@ -82,7 +58,6 @@ struct CDlgGenericMessageParameters
 class CDlgGenericMessage: public wxDialog
 {
     DECLARE_DYNAMIC_CLASS( CDlgGenericMessage )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors

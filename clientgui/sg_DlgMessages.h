@@ -69,7 +69,6 @@ class CNoticeListCtrl;
 class CPanelMessages : public wxPanel
 {
     DECLARE_DYNAMIC_CLASS( CPanelMessages )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors
@@ -123,7 +122,6 @@ protected:
 class CDlgMessages : public wxDialog
 {
     DECLARE_DYNAMIC_CLASS( CDlgMessages )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors

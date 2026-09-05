@@ -1062,9 +1062,6 @@ int CMainDocument::CopyProjectsToStateBuffer(PROJECTS& p, CC_STATE& ccstate) {
 }
 
 
-BEGIN_EVENT_TABLE(AsyncRPCDlg, wxDialog)
-    EVT_BUTTON(wxID_EXIT, AsyncRPCDlg::OnExit)
-END_EVENT_TABLE()
 
 IMPLEMENT_CLASS(AsyncRPCDlg, wxDialog)
 
@@ -1117,6 +1114,7 @@ AsyncRPCDlg::AsyncRPCDlg() : wxDialog( NULL, wxID_ANY, wxT(""), wxDefaultPositio
     }
 
     Centre( wxBOTH | wxCENTER_FRAME);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnExit(event); }, wxID_EXIT);
 }
 
 

@@ -18,12 +18,6 @@
 
 #include "stdwx.h"
 #include "diagnostics.h"
-#include "util.h"
-#include "mfile.h"
-#include "miofile.h"
-#include "parse.h"
-#include "error_numbers.h"
-#include "error_numbers.h"
 #include "BOINCGUIApp.h"
 #include "SkinManager.h"
 #include "MainDocument.h"
@@ -49,12 +43,6 @@
 #include "ProxyPage.h"
 
 IMPLEMENT_DYNAMIC_CLASS(CWizardAttach, CBOINCBaseWizard)
-
-BEGIN_EVENT_TABLE(CWizardAttach, CBOINCBaseWizard)
-EVT_WIZARD_FINISHED(ID_ATTACHWIZARD, CWizardAttach::OnFinished)
-EVT_BUTTON(wxID_BACKWARD, CWizardAttach::OnWizardBack)
-EVT_BUTTON(wxID_FORWARD, CWizardAttach::OnWizardNext)
-END_EVENT_TABLE()
 
 CWizardAttach::CWizardAttach() {
 }
@@ -123,6 +111,10 @@ bool CWizardAttach::Create(wxWindow* parent, wxWindowID id, const wxString&, con
     CBOINCBaseWizard::Create( parent, id, strTitle, wxBitmapBundle(), pos, style );
 
     CreateControls();
+
+    Bind(wxEVT_WIZARD_FINISHED, [this](wxWizardEvent& event) { OnFinished(event); }, ID_ATTACHWIZARD);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event) { OnWizardBack(event); }, wxID_BACKWARD);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event) { OnWizardNext(event); }, wxID_FORWARD);
 
     return true;
 }

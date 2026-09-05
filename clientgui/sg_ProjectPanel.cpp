@@ -17,8 +17,6 @@
 
 #include "stdwx.h"
 
-#define TESTBIGICONPOPUP 0
-
 #define SORTPROJECTLIST 1
 
 #include "app_ipc.h"
@@ -31,31 +29,8 @@
 #include "BOINCBaseWizard.h"
 #include "WizardAttach.h"
 #include "sg_ProjectPanel.h"
-#if TESTBIGICONPOPUP
-#include "test/sah_40.xpm"
-#include "test/einstein_icon.xpm"
-#endif
 
 IMPLEMENT_DYNAMIC_CLASS(CSimpleProjectPanel, CSimplePanelBase)
-
-BEGIN_EVENT_TABLE(CSimpleProjectPanel, CSimplePanelBase)
-#ifdef __WXMAC__
-    EVT_CHOICE(ID_SGPROJECTSELECTOR, CSimpleProjectPanel::OnProjectSelection)
-#else
-    EVT_COMBOBOX(ID_SGPROJECTSELECTOR, CSimpleProjectPanel::OnProjectSelection)
-#endif
-    EVT_BUTTON(ID_ADDROJECTBUTTON, CSimpleProjectPanel::OnAddProject)
-#if TESTBIGICONPOPUP
-    EVT_BUTTON(ID_PROJECTWEBSITESBUTTON, CSimpleProjectPanel::OnProjectWebSiteButton)
-    EVT_BUTTON(ID_PROJECTCOMMANDBUTTON, CSimpleProjectPanel::OnProjectCommandButton)
-#endif
-END_EVENT_TABLE()
-
-
-#if TESTBIGICONPOPUP
-static wxString tempArray[] = {_T("String1"), _T("String2"), _T("String3"), _T("String4") };
-static wxBitmap bmArray[3];
-#endif
 
 CSimpleProjectPanel::CSimpleProjectPanel() {
 }
@@ -107,20 +82,7 @@ CSimpleProjectPanel::CSimpleProjectPanel( wxWindow* parent ) :
     bSizer1->AddSpacer(5);
 #endif
 
-#if TESTBIGICONPOPUP
-    m_ProjectSelectionCtrl = new CBOINCBitmapComboBox( this, ID_SGPROJECTSELECTOR, wxT(""), wxDefaultPosition, wxSize(-1, 42), 4, tempArray, wxCB_READONLY );
-    CSkinSimple* pSkinSimple = wxGetApp().GetSkinManager()->GetSimple();
-    bmArray[0] = *pSkinSimple->GetProjectImage()->GetBitmap();
-    m_ProjectSelectionCtrl->SetItemBitmap(0, bmArray[0]);
-    bmArray[1] = wxBitmap((const char**)sah_40_xpm);
-    m_ProjectSelectionCtrl->SetItemBitmap(1, bmArray[1]);
-    bmArray[2] = wxBitmap((const char**)einstein_icon_xpm);
-    m_ProjectSelectionCtrl->SetItemBitmap(3, bmArray[2]);
-//    m_ProjectSelectionCtrl->SetStringSelection(tempArray[1]);
-    m_ProjectSelectionCtrl->SetSelection(1);
-#else
     m_ProjectSelectionCtrl = new CBOINCBitmapComboBox( this, ID_SGPROJECTSELECTOR, wxT(""), wxDefaultPosition, wxSize(-1, 42), 0, NULL, wxCB_READONLY);
-#endif
     // TODO: Might want better wording for Project Selection Combo Box tooltip
     str = _("Select a project to access with the controls below");
     m_ProjectSelectionCtrl->SetToolTip(str);
@@ -168,6 +130,13 @@ CSimpleProjectPanel::CSimpleProjectPanel( wxWindow* parent ) :
 
     m_TaskAddProjectButton->SetToolTip(wxEmptyString);
     m_TaskAddProjectButton->Disable();
+
+#ifdef __WXMAC__
+    Bind(wxEVT_CHOICE, [this](wxCommandEvent& event){ OnProjectSelection(event); }, ID_SGPROJECTSELECTOR);
+#else
+    Bind(wxEVT_COMBOBOX, [this](wxCommandEvent& event){ OnProjectSelection(event); }, ID_SGPROJECTSELECTOR);
+#endif
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnAddProject(event); }, ID_ADDROJECTBUTTON);
 }
 
 
@@ -379,43 +348,8 @@ void CSimpleProjectPanel::OnWizardUpdate() {
 }
 
 
-#if TESTBIGICONPOPUP
-void CSimpleProjectPanel::OnProjectWebSiteButton(wxCommandEvent& /*event*/) {
-    m_ProjectSelectionCtrl->Delete(0); /*** CAF *** FOR TESTING ONLY ***/
-}
-
-
-void CSimpleProjectPanel::OnProjectCommandButton(wxCommandEvent& /*event*/) {
-/*** CAF *** FOR TESTING ONLY ***/
-    static int i = 1;
-    wxString s;
-
-    if (++i > 8) i = 0;
-    int sel = i % 3;
-//    m_ProjectSelectionCtrl->SetStringSelection(tempArray[sel]);
-    m_ProjectSelectionCtrl->SetSelection(sel);
-#if 0 //TESTBIGICONPOPUP
-    wxRect r;
-    wxWindowDC dc(this);
-    r = m_ProjectSelectionCtrl->GetRect();
-    dc.DrawBitmap(bmArray[sel], r.x + 9, r.y, false);
-#endif
-
-}
-#endif
-
-
 void CSimpleProjectPanel::OnProjectSelection(wxCommandEvent& /*event*/) {
     UpdateInterface();
-
-//    const int sel = m_ProjectSelectionCtrl->GetSelection();
-#if 0 //TESTBIGICONPOPUP
-    wxRect r;
-    wxWindowDC dc(this);
-
-    r = m_ProjectSelectionCtrl->GetRect();
-    dc.DrawBitmap(bmArray[sel], r.x + 9, r.y - 10, false);
-#endif
 }
 
 

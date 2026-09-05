@@ -50,7 +50,7 @@ public:
     void OnNotificationTimeout(wxTaskBarIconEvent& event);
 #endif
 #ifdef __WXMSW__
-    void OnShutdown(wxTaskBarIconEvent& event);
+    void OnShutdown(CTaskbarEvent& event);
 #endif
     void OnLButtonDClick(wxTaskBarIconEvent& event);
 #ifdef __WXGTK__
@@ -115,8 +115,6 @@ private:
 
     void            UpdateTaskbarStatus();
     void            UpdateNoticeStatus();
-
-    DECLARE_EVENT_TABLE()
 };
 
 
@@ -140,19 +138,10 @@ public:
     wxString                m_message;
 };
 
-
-BEGIN_DECLARE_EVENT_TYPES()
-DECLARE_EVENT_TYPE(wxEVT_TASKBAR_RELOADSKIN, 10100)
-DECLARE_EVENT_TYPE(wxEVT_TASKBAR_REFRESH, 10101)
+wxDECLARE_EVENT(wxEVT_TASKBAR_RELOADSKIN, CTaskbarEvent);
+wxDECLARE_EVENT(wxEVT_TASKBAR_REFRESH, CTaskbarEvent);
 #ifdef __WXMSW__
-DECLARE_EVENT_TYPE(wxEVT_TASKBAR_SHUTDOWN, 10104)
-#endif // __WXMSW__
-END_DECLARE_EVENT_TYPES()
-
-#define EVT_TASKBAR_RELOADSKIN(fn) DECLARE_EVENT_TABLE_ENTRY(wxEVT_TASKBAR_RELOADSKIN, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
-#define EVT_TASKBAR_REFRESH(fn)  DECLARE_EVENT_TABLE_ENTRY(wxEVT_TASKBAR_REFRESH, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
-#ifdef __WXMSW__
-#define EVT_TASKBAR_SHUTDOWN(fn) DECLARE_EVENT_TABLE_ENTRY(wxEVT_TASKBAR_SHUTDOWN, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
+wxDECLARE_EVENT(wxEVT_TASKBAR_SHUTDOWN, CTaskbarEvent);
 #endif // __WXMSW__
 
 #endif

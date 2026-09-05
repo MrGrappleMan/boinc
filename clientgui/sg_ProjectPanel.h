@@ -1,6 +1,6 @@
 // This file is part of BOINC.
-// http://boinc.berkeley.edu
-// Copyright (C) 2023 University of California
+// https://boinc.berkeley.edu
+// Copyright (C) 2026 University of California
 //
 // BOINC is free software; you can redistribute it and/or modify it
 // under the terms of the GNU Lesser General Public License
@@ -37,7 +37,6 @@ class CBOINCBitmapComboBox;
 class CSimpleProjectPanel : public CSimplePanelBase
 {
     DECLARE_DYNAMIC_CLASS( CSimpleProjectPanel )
-    DECLARE_EVENT_TABLE()
 
 	public:
         CSimpleProjectPanel();
@@ -52,11 +51,9 @@ class CSimpleProjectPanel : public CSimplePanelBase
 
 	private:
         void OnProjectSelection(wxCommandEvent &event);
-        void OnProjectCommandButton(wxCommandEvent& /*event*/);
         void OnAddProject(wxCommandEvent& /*event*/);
         void OnWizardAttach(wxCommandEvent&);
         void OnWizardUpdate();
-        void OnProjectWebSiteButton(wxCommandEvent& /*event*/);
         void UpdateProjectList();
         std::string GetProjectIconLoc(char* project_url);
         wxBitmap* GetProjectSpecificBitmap(char* project_url);

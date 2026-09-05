@@ -20,14 +20,12 @@
 
 #include "BOINCBaseView.h"
 #include "common/wxPieCtrl.h"
-#include <wx/dynarray.h>
 
 WX_DECLARE_OBJARRAY(wxColour, wxArrayColour);
 
 class CViewResources : public CBOINCBaseView
 {
     DECLARE_DYNAMIC_CLASS( CViewResources )
-	DECLARE_EVENT_TABLE()
 
 public:
     CViewResources();

@@ -21,7 +21,6 @@
 #include "WizardAttach.h"
 class CCompletionErrorPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CCompletionErrorPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CCompletionErrorPage();
