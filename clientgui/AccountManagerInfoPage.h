@@ -43,7 +43,6 @@ private:
 
 class CAccountManagerInfoPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CAccountManagerInfoPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CAccountManagerInfoPage();

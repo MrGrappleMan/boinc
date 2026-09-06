@@ -1,6 +1,6 @@
 // This file is part of BOINC.
-// http://boinc.berkeley.edu
-// Copyright (C) 2023 University of California
+// https://boinc.berkeley.edu
+// Copyright (C) 2026 University of California
 //
 // BOINC is free software; you can redistribute it and/or modify it
 // under the terms of the GNU Lesser General Public License
@@ -43,7 +43,6 @@ typedef struct {
 class CScrolledTextBox : public wxScrolledWindow
 {
     DECLARE_DYNAMIC_CLASS( CScrolledTextBox )
-    DECLARE_EVENT_TABLE()
 	public:
         CScrolledTextBox();
 		CScrolledTextBox( wxWindow* parent);
@@ -72,7 +71,6 @@ class CScrolledTextBox : public wxScrolledWindow
 class CSlideShowPanel : public wxPanel
 {
     DECLARE_DYNAMIC_CLASS( CSlideShowPanel )
-    DECLARE_EVENT_TABLE()
 
 	public:
         CSlideShowPanel();
@@ -109,7 +107,6 @@ class CSlideShowPanel : public wxPanel
 class CSimpleTaskPanel : public CSimplePanelBase
 {
     DECLARE_DYNAMIC_CLASS( CSimpleTaskPanel )
-    DECLARE_EVENT_TABLE()
 
     public:
         CSimpleTaskPanel();
@@ -138,9 +135,6 @@ class CSimpleTaskPanel : public CSimplePanelBase
 		void DisplayIdleState();
 
 	protected:
-#ifdef __WXMAC__
-        void OnEraseBackground(wxEraseEvent& event);
-#endif
         wxRect*                     m_progressBarRect;
 		CTransparentStaticText*     m_myTasksLabel;
 		CBOINCBitmapComboBox*       m_TaskSelectionCtrl;

@@ -66,7 +66,6 @@
 class CDlgSelectComputer: public wxDialog
 {
     DECLARE_DYNAMIC_CLASS( CDlgSelectComputer )
-    DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors

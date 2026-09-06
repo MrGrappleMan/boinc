@@ -36,15 +36,6 @@ const int dlgHiddenColumnsMinHeight = 400;
 
 IMPLEMENT_DYNAMIC_CLASS(CDlgHiddenColumns, wxDialog)
 
-BEGIN_EVENT_TABLE(CDlgHiddenColumns, wxDialog)
-    EVT_SIZE(CDlgHiddenColumns::OnSize)
-    EVT_BUTTON(wxID_OK,CDlgHiddenColumns::OnOK)
-    EVT_BUTTON(ID_DEFAULTSBTN,CDlgHiddenColumns::OnSetDefaults)
-    EVT_CHECKBOX(wxID_ANY, CDlgHiddenColumns::OnCheckboxClick )
-
-
-END_EVENT_TABLE()
-
 /* Constructor */
 CDlgHiddenColumns::CDlgHiddenColumns(wxWindow* parent) :
     wxDialog( parent, ID_ANYDIALOG, wxEmptyString, wxDefaultPosition,
@@ -118,6 +109,11 @@ CDlgHiddenColumns::CDlgHiddenColumns(wxWindow* parent) :
 #if defined(__WXMSW__) || defined(__WXGTK__)
     SetDoubleBuffered(true);
 #endif
+
+    Bind(wxEVT_SIZE, [this](wxSizeEvent& event){ OnSize(event); });
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnOK(event); }, wxID_OK);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnSetDefaults(event); }, ID_DEFAULTSBTN);
+    Bind(wxEVT_CHECKBOX, [this](wxCommandEvent& event){ OnCheckboxClick(event); });
 }
 
 // destructor

@@ -31,7 +31,6 @@ class CDlgEventLog;
 class CDlgEventLogListCtrl : public DLG_LISTCTRL_BASE
 {
     DECLARE_DYNAMIC_CLASS(CDlgEventLogListCtrl)
-    DECLARE_EVENT_TABLE()
 
 public:
     CDlgEventLogListCtrl();
@@ -80,8 +79,6 @@ public:
 private:
     wxGenericListCtrl *     m_listCtrl;
     int                     m_view_startX;
-
-    DECLARE_EVENT_TABLE()
 };
 #endif
 

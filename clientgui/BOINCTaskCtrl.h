@@ -56,12 +56,6 @@ private:
     CBOINCBaseView*  m_pParent;
 
     wxBoxSizer*      m_pSizer;
-
-#ifdef __WXMSW__
-    DECLARE_EVENT_TABLE()
-#endif
 };
 
-
 #endif
-

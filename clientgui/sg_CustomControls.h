@@ -49,8 +49,6 @@ public:
 
     void     OnPaint(wxPaintEvent& event);
 
-    DECLARE_EVENT_TABLE()
-
 private:
     wxColour m_LineColor;
 };
@@ -86,14 +84,12 @@ public:
 
     virtual void OnEraseBackground(wxEraseEvent& /*event*/) {};
 
-    DECLARE_EVENT_TABLE()
 };
 
 
 class CTransparentButton : public wxButton
 {
     DECLARE_DYNAMIC_CLASS (CTransparentButton)
-    DECLARE_EVENT_TABLE()
 
 public:
     CTransparentButton();
@@ -159,8 +155,6 @@ private:
 #ifndef __WXMAC__
     public:
     virtual void OnEraseBackground(wxEraseEvent& event);
-
-    DECLARE_EVENT_TABLE()
 #endif
 };
 
@@ -200,7 +194,6 @@ public:
     virtual void OnPaint(wxPaintEvent& event);
     virtual void OnMouse(wxMouseEvent& event);
 
-    DECLARE_EVENT_TABLE()
 private:
     wxWindow*   m_pWnd;
 };
@@ -240,7 +233,6 @@ public:
     virtual void OnEraseBackground(wxEraseEvent& /*event*/) {};
     virtual void OnPaint(wxPaintEvent& event);
 
-    DECLARE_EVENT_TABLE()
 private:
     wxBitmap   m_bitMap;
 };
@@ -275,8 +267,6 @@ private:
 #ifndef __WXMAC__
 public:
     virtual void OnEraseBackground(wxEraseEvent& event);
-
-    DECLARE_EVENT_TABLE()
 #endif
 };
 
@@ -311,7 +301,6 @@ public:
 
     virtual void OnMouse(wxMouseEvent& event);
 
-    DECLARE_EVENT_TABLE()
 private:
     wxCursor m_HandCursor;
 };

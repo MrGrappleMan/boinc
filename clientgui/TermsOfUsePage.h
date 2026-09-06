@@ -20,7 +20,6 @@
 
 class CTermsOfUsePage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CTermsOfUsePage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CTermsOfUsePage();

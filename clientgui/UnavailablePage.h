@@ -20,7 +20,6 @@
 
 class CErrUnavailablePage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CErrUnavailablePage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CErrUnavailablePage();

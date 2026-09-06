@@ -22,7 +22,6 @@ class CProjectInfo;
 
 class CProjectInfoPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CProjectInfoPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CProjectInfoPage();

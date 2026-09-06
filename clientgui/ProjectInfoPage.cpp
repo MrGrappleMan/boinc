@@ -93,16 +93,6 @@ IMPLEMENT_DYNAMIC_CLASS(CProjectInfo, wxObject)
 
 IMPLEMENT_DYNAMIC_CLASS(CProjectInfoPage, CBOINCWizardPage)
 
-BEGIN_EVENT_TABLE(CProjectInfoPage, CBOINCWizardPage)
-
-EVT_COMBOBOX(ID_CATEGORIES, CProjectInfoPage::OnProjectCategorySelected)
-EVT_LIST_ITEM_SELECTED(ID_PROJECTS, CProjectInfoPage::OnProjectSelected)
-EVT_WIZARD_PAGE_CHANGED(wxID_ANY, CProjectInfoPage::OnPageChanged)
-EVT_WIZARD_PAGE_CHANGING(wxID_ANY, CProjectInfoPage::OnPageChanging)
-EVT_WIZARD_CANCEL(wxID_ANY, CProjectInfoPage::OnCancel)
-
-END_EVENT_TABLE()
-
 CProjectInfoPage::CProjectInfoPage() {
 }
 
@@ -165,6 +155,11 @@ bool CProjectInfoPage::Create(CWizardAttach* parent) {
     CreateControls();
 
     GetSizer()->Fit(this);
+    Bind(wxEVT_COMBOBOX, [this](wxCommandEvent& event){ OnProjectCategorySelected(event); }, ID_CATEGORIES);
+    Bind(wxEVT_LIST_ITEM_SELECTED, [this](wxListEvent& event){ OnProjectSelected(event); }, ID_PROJECTS);
+    Bind(wxEVT_WIZARD_PAGE_CHANGED, [this](wxWizardEvent& event){ OnPageChanged(event); });
+    Bind(wxEVT_WIZARD_PAGE_CHANGING, [this](wxWizardEvent& event){ OnPageChanging(event); });
+    Bind(wxEVT_WIZARD_CANCEL, [this](wxWizardEvent& event){ OnCancel(event); });
     return true;
 }
 

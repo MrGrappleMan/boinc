@@ -21,7 +21,6 @@
 #include "WizardAttach.h"
 class CAccountInfoPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CAccountInfoPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CAccountInfoPage();

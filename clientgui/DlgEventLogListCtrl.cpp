@@ -31,10 +31,6 @@
 #ifdef __WXGTK__
 IMPLEMENT_DYNAMIC_CLASS(MyEvtLogEvtHandler, wxEvtHandler)
 
-BEGIN_EVENT_TABLE(MyEvtLogEvtHandler, wxEvtHandler)
-    EVT_PAINT(MyEvtLogEvtHandler::OnPaint)
-END_EVENT_TABLE()
-
 MyEvtLogEvtHandler::MyEvtLogEvtHandler() {
     m_view_startX = 0;
 }
@@ -42,6 +38,7 @@ MyEvtLogEvtHandler::MyEvtLogEvtHandler() {
 MyEvtLogEvtHandler::MyEvtLogEvtHandler(wxGenericListCtrl *theListControl) {
     m_listCtrl = theListControl;
     m_view_startX = 0;
+    Bind(wxEVT_PAINT, [this](wxPaintEvent& event){ OnPaint(event); });
 }
 
 void MyEvtLogEvtHandler::OnPaint(wxPaintEvent & event)
@@ -69,15 +66,6 @@ void MyEvtLogEvtHandler::OnPaint(wxPaintEvent & event)
 
 IMPLEMENT_DYNAMIC_CLASS(CDlgEventLogListCtrl, DLG_LISTCTRL_BASE)
 
-BEGIN_EVENT_TABLE(CDlgEventLogListCtrl, DLG_LISTCTRL_BASE)
-    EVT_LEFT_UP(CDlgEventLogListCtrl::OnMouseUp)
-#ifdef __WXMAC__
-	EVT_SIZE(CDlgEventLogListCtrl::OnSize)
-#endif
-
-END_EVENT_TABLE()
-
-
 CDlgEventLogListCtrl::CDlgEventLogListCtrl() {}
 
 CDlgEventLogListCtrl::CDlgEventLogListCtrl(CDlgEventLog* pView, wxWindowID iListWindowID, wxInt32 iListWindowFlags)
@@ -96,6 +84,11 @@ CDlgEventLogListCtrl::CDlgEventLogListCtrl(CDlgEventLog* pView, wxWindowID iList
     m_fauxHeaderView = NULL;
     m_fauxBodyView = NULL;
     SetupMacAccessibilitySupport();
+#endif
+
+    Bind(wxEVT_LEFT_UP, [this](wxMouseEvent& event){ OnMouseUp(event); });
+#ifdef __WXMAC__
+	Bind(wxEVT_SIZE, [this](wxSizeEvent& event){ OnSize(event); });
 #endif
 }
 

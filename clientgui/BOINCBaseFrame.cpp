@@ -35,30 +35,15 @@
 #include "BOINCBaseWizard.h"
 #include "WizardAttach.h"
 
-DEFINE_EVENT_TYPE(wxEVT_FRAME_ALERT)
-DEFINE_EVENT_TYPE(wxEVT_FRAME_CONNECT)
-DEFINE_EVENT_TYPE(wxEVT_FRAME_INITIALIZED)
-DEFINE_EVENT_TYPE(wxEVT_FRAME_REFRESHVIEW)
-DEFINE_EVENT_TYPE(wxEVT_FRAME_UPDATESTATUS)
-DEFINE_EVENT_TYPE(wxEVT_FRAME_RELOADSKIN)
-DEFINE_EVENT_TYPE(wxEVT_FRAME_NOTIFICATION)
-
+wxDEFINE_EVENT(wxEVT_FRAME_ALERT, CFrameAlertEvent);
+wxDEFINE_EVENT(wxEVT_FRAME_INITIALIZED, CFrameEvent);
+wxDEFINE_EVENT(wxEVT_FRAME_REFRESHVIEW, CFrameEvent);
+wxDEFINE_EVENT(wxEVT_FRAME_UPDATESTATUS, CFrameEvent);
+wxDEFINE_EVENT(wxEVT_FRAME_CONNECT, CFrameEvent);
+wxDEFINE_EVENT(wxEVT_FRAME_RELOADSKIN, CFrameEvent);
+wxDEFINE_EVENT(wxEVT_FRAME_NOTIFICATION, CFrameEvent);
 
 IMPLEMENT_DYNAMIC_CLASS(CBOINCBaseFrame, wxFrame)
-
-BEGIN_EVENT_TABLE (CBOINCBaseFrame, wxFrame)
-    EVT_TIMER(ID_DOCUMENTPOLLTIMER, CBOINCBaseFrame::OnDocumentPoll)
-    EVT_TIMER(ID_ALERTPOLLTIMER, CBOINCBaseFrame::OnAlertPoll)
-    EVT_TIMER(ID_PERIODICRPCTIMER, CBOINCBaseFrame::OnPeriodicRPC)
-    EVT_FRAME_INITIALIZED(CBOINCBaseFrame::OnInitialized)
-    EVT_FRAME_ALERT(CBOINCBaseFrame::OnAlert)
-    EVT_FRAME_REFRESH(CBOINCBaseFrame::OnRefreshView)
-    EVT_ACTIVATE(CBOINCBaseFrame::OnActivate)
-    EVT_CLOSE(CBOINCBaseFrame::OnClose)
-    EVT_MENU(ID_CLOSEWINDOW, CBOINCBaseFrame::OnCloseWindow)
-    EVT_MENU(wxID_EXIT, CBOINCBaseFrame::OnExit)
-    EVT_SYS_COLOUR_CHANGED(CBOINCBaseFrame::OnDarkModeChanged)
-END_EVENT_TABLE ()
 
 
 CBOINCBaseFrame::CBOINCBaseFrame()
@@ -113,6 +98,18 @@ CBOINCBaseFrame::CBOINCBaseFrame(wxWindow* parent, const wxWindowID id, const wx
     //   constructor and the first call to OnFrameRender
     //
     // Look for the 'if (!bAlreadyRunOnce) {' statement
+
+    Bind(wxEVT_TIMER, [this](wxTimerEvent& event){ OnDocumentPoll(event); }, ID_DOCUMENTPOLLTIMER);
+    Bind(wxEVT_TIMER, [this](wxTimerEvent& event){ OnAlertPoll(event); }, ID_ALERTPOLLTIMER);
+    Bind(wxEVT_TIMER, [this](wxTimerEvent& event){ OnPeriodicRPC(event); }, ID_PERIODICRPCTIMER);
+    Bind(wxEVT_FRAME_INITIALIZED, [this](CFrameEvent& event){ OnInitialized(event); });
+    Bind(wxEVT_FRAME_ALERT, [this](CFrameAlertEvent& event){ OnAlert(event); });
+    Bind(wxEVT_FRAME_REFRESHVIEW, [this](CFrameEvent& event){ OnRefreshView(event); });
+    Bind(wxEVT_ACTIVATE, [this](wxActivateEvent& event){ OnActivate(event); });
+    Bind(wxEVT_CLOSE_WINDOW, [this](wxCloseEvent& event){ OnClose(event); });
+    Bind(wxEVT_MENU, [this](wxCommandEvent& event){ OnCloseWindow(event); }, ID_CLOSEWINDOW);
+    Bind(wxEVT_MENU, [this](wxCommandEvent& event){ OnExit(event); }, wxID_EXIT);
+    Bind(wxEVT_SYS_COLOUR_CHANGED, [this](wxSysColourChangedEvent& event){ OnDarkModeChanged(event); });
 
     wxLogTrace(wxT("Function Start/End"), wxT("CBOINCBaseFrame::CBOINCBaseFrame - Function End"));
 }

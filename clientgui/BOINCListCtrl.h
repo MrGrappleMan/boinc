@@ -125,8 +125,6 @@ private:
     void*                   m_fauxBodyView;
 #endif
 #endif
-
-    DECLARE_EVENT_TABLE()
 };
 
 class CDrawProgressBarEvent : public wxEvent
@@ -153,16 +151,8 @@ public:
     virtual wxEvent *       Clone() const { return new CCheckSelectionChangedEvent(*this); }
 };
 
-
-BEGIN_DECLARE_EVENT_TYPES()
-DECLARE_EVENT_TYPE( wxEVT_DRAW_PROGRESSBAR, 12000 )
-DECLARE_EVENT_TYPE( wxEVT_CHECK_SELECTION_CHANGED, 12002 )
-END_DECLARE_EVENT_TYPES()
-
-#define EVT_DRAW_PROGRESSBAR(fn)            DECLARE_EVENT_TABLE_ENTRY(wxEVT_DRAW_PROGRESSBAR, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
-
-#define EVT_CHECK_SELECTION_CHANGED(fn)            DECLARE_EVENT_TABLE_ENTRY(wxEVT_CHECK_SELECTION_CHANGED, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
-
+wxDECLARE_EVENT(wxEVT_DRAW_PROGRESSBAR, CDrawProgressBarEvent);
+wxDECLARE_EVENT(wxEVT_CHECK_SELECTION_CHANGED, CCheckSelectionChangedEvent);
 
 // Define a custom event handler
 class MyEvtHandler : public wxEvtHandler
@@ -182,8 +172,6 @@ private:
     int                     m_view_startX;
 #endif
 #endif
-
-    DECLARE_EVENT_TABLE()
 };
 
 #endif

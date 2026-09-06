@@ -21,7 +21,6 @@
 
 class CErrProxyPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CErrProxyPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CErrProxyPage();

@@ -28,13 +28,7 @@ public:
     virtual wxEvent *Clone() const { return new CAccountManagerProcessingPageEvent(*this); }
 };
 
-
-BEGIN_DECLARE_EVENT_TYPES()
-DECLARE_EVENT_TYPE( wxEVT_ACCOUNTMANAGERPROCESSING_STATECHANGE, 11100 )
-END_DECLARE_EVENT_TYPES()
-
-#define EVT_ACCOUNTMANAGERPROCESSING_STATECHANGE(fn) \
-    DECLARE_EVENT_TABLE_ENTRY(wxEVT_ACCOUNTMANAGERPROCESSING_STATECHANGE, -1, -1, (wxObjectEventFunction) (wxEventFunction) &fn, NULL),
+wxDECLARE_EVENT(wxEVT_ACCOUNTMANAGERPROCESSING_STATECHANGE, CAccountManagerProcessingPageEvent);
 
 #define ATTACHACCTMGR_INIT                              0
 #define ATTACHACCTMGR_ATTACHACCTMGR_BEGIN               1
@@ -44,7 +38,6 @@ END_DECLARE_EVENT_TYPES()
 
 class CAccountManagerProcessingPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS( CAccountManagerProcessingPage )
-    DECLARE_EVENT_TABLE()
 
 public:
     CAccountManagerProcessingPage();

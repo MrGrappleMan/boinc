@@ -39,30 +39,7 @@
 using std::string;
 
 
-/*!
- * CPanelPreferences type definition
- */
-
 IMPLEMENT_DYNAMIC_CLASS( CPanelPreferences, wxPanel )
-
-/*!
- * CPanelPreferences event table definition
- */
-
-BEGIN_EVENT_TABLE( CPanelPreferences, wxPanel )
-////@begin CPanelPreferences event table entries
-    EVT_COMMAND_RANGE(ID_SG_PREFS_START,ID_SG_PREFS_LAST,
-                        wxEVT_COMMAND_CHECKBOX_CLICKED,
-                        CPanelPreferences::OnHandleCheckboxEvent
-                    )
-    EVT_ERASE_BACKGROUND( CPanelPreferences::OnEraseBackground )
-    EVT_BUTTON( ID_SIMPLE_HELP, CPanelPreferences::OnButtonHelp )
-////@end CPanelPreferences event table entries
-END_EVENT_TABLE()
-
-/*!
- * CPanelPreferences constructors
- */
 
 CPanelPreferences::CPanelPreferences( )
 {
@@ -105,6 +82,9 @@ bool CPanelPreferences::Create()
     GetSizer()->Fit(this);
     GetSizer()->SetSizeHints(this);
 
+    Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, [this](wxCommandEvent& event){ OnHandleCheckboxEvent(event); },  ID_SG_PREFS_START, ID_SG_PREFS_LAST);
+    Bind(wxEVT_ERASE_BACKGROUND, [this](wxEraseEvent& event){ OnEraseBackground(event); });
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnButtonHelp(event); }, ID_SIMPLE_HELP);
     return true;
 }
 
@@ -1102,27 +1082,7 @@ bool CPanelPreferences::doesLocalPrefsFileExist() {
 }
 
 
-/*!
- * CDlgPreferences type definition
- */
-
 IMPLEMENT_DYNAMIC_CLASS( CDlgPreferences, wxDialog )
-
-/*!
- * CDlgPreferences event table definition
- */
-
-BEGIN_EVENT_TABLE( CDlgPreferences, wxDialog )
-////@begin CDlgPreferences event table entries
-    EVT_HELP(wxID_ANY, CDlgPreferences::OnHelp)
-    EVT_BUTTON( ID_SGPREFERENCESCLEAR, CDlgPreferences::OnButtonClear )
-    EVT_BUTTON( wxID_OK, CDlgPreferences::OnOK )
-////@end CDlgPreferences event table entries
-END_EVENT_TABLE()
-
-/*!
- * CDlgPreferences constructors
- */
 
 CDlgPreferences::CDlgPreferences( )
 {
@@ -1181,6 +1141,10 @@ bool CDlgPreferences::Create( wxWindow* parent, wxWindowID id, const wxString& c
     SetEscapeId(wxID_CANCEL);
 
     Thaw();
+
+    Bind(wxEVT_HELP, [this](wxHelpEvent& event){ OnHelp(event); });
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnButtonClear(event); }, ID_SGPREFERENCESCLEAR);
+    Bind(wxEVT_BUTTON, [this](wxCommandEvent& event){ OnOK(event); }, wxID_OK);
 
     return true;
 }

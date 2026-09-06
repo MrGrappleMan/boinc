@@ -20,7 +20,6 @@
 
 class CErrAlreadyExistsPage: public CBOINCWizardPage {
     DECLARE_DYNAMIC_CLASS(CErrAlreadyExistsPage)
-    DECLARE_EVENT_TABLE()
 
 public:
     CErrAlreadyExistsPage();
